@@ -1,0 +1,10 @@
+.operand {
+    width: 5vw;
+    height: 5vw;
+    border: 1px solid black;
+    border-radius: 50%;
+    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
