@@ -1,0 +1,113 @@
+.snake-body {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 4vw;
+    top: 2vw;
+}
+
+.snake-body-second {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 6vw;
+    top: 1vw;
+}
+.snake-body-third {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 7.5vw;
+    top: 2vw;
+}
+.snake-body-fourth {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 9.5vw;
+    top: 1vw;
+}
+.snake-body-fifth {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 11.5vw;
+    top: 2vw;
+}
+.snake-body-sixth {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 13vw;
+    top: 1vw;
+}
+.snake-body-seventh {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 14.5vw;
+    top: 2vw;
+}
+.snake-body-eighth {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 16.5vw;
+    top: 1vw;
+}
+.snake-body-ninth {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 18vw;
+    top: 2.5vw;
+}
+.snake-body-tenth {
+    width: 2.5vw;
+    height: 2.5vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 20vw;
+    top: 3vw;
+}
+
+.snake-body-eleventh {
+    width: 2vw;
+    height: 2vw;
+    border: 1px solid black;
+    background: yellowgreen;
+    border-radius: 50%;
+    position: absolute;
+    left: 22vw;
+    top: 3vw;
+}
+
