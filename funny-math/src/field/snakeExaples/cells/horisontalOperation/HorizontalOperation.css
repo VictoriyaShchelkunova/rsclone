@@ -1,0 +1,9 @@
+.horizontal-operation {
+    width: 100%;
+    height: 50%;
+    border-bottom: 2px solid black;
+    margin-bottom: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
