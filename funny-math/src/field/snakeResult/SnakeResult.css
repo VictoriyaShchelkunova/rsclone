@@ -1,0 +1,17 @@
+.snake-wrapper {
+    width: 100%;
+    height: 6vw;
+    border: 1px solid black;
+    display: flex;
+    position: relative;
+}
+
+.head-snake {
+    width: 6vw;
+    height: 100%;
+    border: 1px solid black;
+    background-image: url(assets/images/headSnake.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+}
