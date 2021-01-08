@@ -1,0 +1,12 @@
+.result {
+    width: 5vw;
+    border: 2px solid black;
+    height: 5vw;
+    border-radius: 50%;
+    background: yellow;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
