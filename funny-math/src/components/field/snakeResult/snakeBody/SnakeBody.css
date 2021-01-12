@@ -1,113 +1,178 @@
-.snake-body {
-    width: 3vw;
-    height: 3vw;
-    border: 1px solid black;
-    background: yellowgreen;
-    border-radius: 50%;
-    position: absolute;
-    left: 4vw;
-    top: 2vw;
+@keyframes move-body{
+    0% {
+        top: 4vw;
+    }
+    20% {
+        top: 5vw;
+    }
+    40% {
+        top: 5.5vw;
+    } 
+    60% {
+        top: 6vw;
+    }
+    80% {
+        top: 5.5vw;
+    }
+    100% {
+        top: 5vw;
+    }
 }
 
-.snake-body-second {
-    width: 3vw;
-    height: 3vw;
+@keyframes move-head{
+    0% {
+        top: 3.5vw;
+    }
+    20% {
+        top: 3.8vw;
+    }
+    40% {
+        top: 4vw;
+    } 
+    60% {
+        top: 3.8vw;
+    }
+    80% {
+        top: 3.5vw;
+    }
+    100% {
+        top: 3vw;
+    }
+}
+
+.snake-body {
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
+    background: white;
     border-radius: 50%;
     position: absolute;
     left: 6vw;
-    top: 1vw;
+    top: 4vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-head 3s ease 0.1s infinite;
+}
+
+
+.snake-body-second {
+    width: 4vw;
+    height: 4vw;
+    border: 1px solid black;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    left: 7vw;
+    top: 3vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0s infinite;
 }
 .snake-body-third {
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
+    background: white;
     border-radius: 50%;
     position: absolute;
-    left: 7.5vw;
-    top: 2vw;
+    left: 9vw;
+    top: 4vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.2s infinite;
 }
 .snake-body-fourth {
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
+    background: white;
     border-radius: 50%;
     position: absolute;
-    left: 9.5vw;
-    top: 1vw;
+    left: 12vw;
+    top: 3vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.3s infinite;
 }
 .snake-body-fifth {
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
+    background: white;
     border-radius: 50%;
     position: absolute;
-    left: 11.5vw;
-    top: 2vw;
+    left: 14vw;
+    top: 4vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.4s infinite;
 }
 .snake-body-sixth {
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
+    background: white;
     border-radius: 50%;
     position: absolute;
-    left: 13vw;
-    top: 1vw;
+    left: 16vw;
+    top: 3vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.5s infinite;
 }
 .snake-body-seventh {
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
-    border-radius: 50%;
-    position: absolute;
-    left: 14.5vw;
-    top: 2vw;
-}
-.snake-body-eighth {
-    width: 3vw;
-    height: 3vw;
-    border: 1px solid black;
-    background: yellowgreen;
-    border-radius: 50%;
-    position: absolute;
-    left: 16.5vw;
-    top: 1vw;
-}
-.snake-body-ninth {
-    width: 3vw;
-    height: 3vw;
-    border: 1px solid black;
-    background: yellowgreen;
+    background:white;
     border-radius: 50%;
     position: absolute;
     left: 18vw;
-    top: 2.5vw;
+    top: 4vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.6s infinite;
 }
-.snake-body-tenth {
-    width: 2.5vw;
-    height: 2.5vw;
+.snake-body-eighth {
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
+    background: white;
     border-radius: 50%;
     position: absolute;
     left: 20vw;
     top: 3vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.7s infinite;
 }
-
-.snake-body-eleventh {
-    width: 2vw;
-    height: 2vw;
+.snake-body-ninth {
+    width: 4vw;
+    height: 4vw;
     border: 1px solid black;
-    background: yellowgreen;
+    background: white;
     border-radius: 50%;
     position: absolute;
     left: 22vw;
-    top: 3vw;
+    top: 4.5vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.8s infinite;
+}
+.snake-body-tenth {
+    width: 3.5vw;
+    height: 3.5vw;
+    border: 1px solid black;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    left: 24vw;
+    top: 5vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 0.9s infinite;
+}
+
+.snake-body-eleventh {
+    width: 3vw;
+    height: 3vw;
+    border: 1px solid black;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    left: 26vw;
+    top: 5vw;
+    box-shadow:  2px 4px 8px black;
+    animation: move-body 3s ease 1s infinite;
 }
 
