@@ -17,7 +17,7 @@ export const Cell = ({ parity, indexOperand, indexOperation }) => {
     for (let i = 0; i < 7; i++) {
         if (!(i % 2) && !(parity % 2)) {
             cells.push(<div className="cell" key={i}>
-                <Operand number={firstOperands[indexNumber]} />
+                <Operand number={firstOperands[indexNumber]} id={parity} cell={i}/>
             </div>);
             indexNumber += 1;
         } else if (!(i % 2) && parity % 2) {
