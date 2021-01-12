@@ -1,8 +1,10 @@
 .wrapper {
     min-width: 320px;
     max-width: 1200px;
-    height: 99vh;
-    margin: 0 auto;
-    border: 1px solid black;
-    margin-top: 2px;
+    height: 95vh;
+    border-radius: 10px;
+    margin: 20px auto;
+    border: 1px solid rgb(0, 132, 255);
+    box-shadow: 0px 0px 9px 2px;
+
 }
