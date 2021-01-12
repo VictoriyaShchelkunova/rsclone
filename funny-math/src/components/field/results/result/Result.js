@@ -1,21 +1,20 @@
-import React, {Component} from "react";
+import React from "react";
 import './Result.css';
 import { shuffleResults } from "./getResults";
+import { connect } from 'react-redux';
+import { makeHiddenResult, makeVisibleResult, makeVisibleSnake } from "../../../../actions";
 
-export class Result extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            hidden: "visible"
-        }
-    }
-    dragStart = (e) => {
+export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, makeVisibleSnake }) => {
+
+    const dragStart = (e) => {
         e.preventDefault();
-    }    
+    }
 
-    mouseDown = (event) => {
+    const mouseDown = (event) => {
         const result = event.currentTarget;
+        let droppableBelow = null;
         let currentDroppable = null;
+        let usersAnswer = result.firstChild.innerText;
 
         let shiftX = event.clientX - result.getBoundingClientRect().left;
         let shiftY = event.clientY - result.getBoundingClientRect().top;
@@ -30,58 +29,83 @@ export class Result extends Component {
             result.style.top = pageY - shiftY + 'px';
         }
 
-        const  onMouseMove = (e) =>  {
+        const onMouseMove = (e) => {
             moveAt(e.pageX, e.pageY);
-
-            this.setState({
-                hidden: "hidden"
-            })
+            makeHiddenResult();
             let elemBelow = document.elementFromPoint(e.clientX, e.clientY);
-            this.setState({
-                hidden: "visible"
-            })
+            makeVisibleResult();
 
             if (!elemBelow) return;
 
-            let droppableBelow = elemBelow.closest('.droppable');
+            droppableBelow = elemBelow.closest('.droppable');
             if (currentDroppable != droppableBelow) {
-                if (currentDroppable) { 
-                    this.leaveDroppable(currentDroppable);
-                }
-                currentDroppable = droppableBelow;
-                if (currentDroppable) { 
-                    this.enterDroppable(currentDroppable);
+                if (currentDroppable) {
+                    leaveDroppable(currentDroppable);
                 }
             }
         }
 
         document.addEventListener('mousemove', onMouseMove);
 
-        result.onmouseup = function () {
+        result.onmouseup = () => {
+            let clearAnswer;
+            if (droppableBelow) {
+                clearAnswer = droppableBelow.firstChild.innerText;
+            }
+            if (usersAnswer !== clearAnswer) {
+                result.style.position = "relative";
+                result.style.top = "";
+                result.style.left = "";
+                result.style.zIndex = "";
+                if (droppableBelow) leaveDroppable(droppableBelow);
+
+            } else {
+                result.style.display = "none";
+                droppableBelow.style.background = "rgb(33, 241, 26)";
+                droppableBelow.firstChild.classList.remove("text-hidden");
+                droppableBelow.firstChild.classList.add("text-visual");
+                droppableBelow.classList.remove("droppable");
+                makeVisibleSnake();
+            };
+
             document.removeEventListener('mousemove', onMouseMove);
             result.onmouseup = null;
         };
     }
-    
-    enterDroppable(elem) {
-        elem.style.background = 'pink';
-    }
 
-    leaveDroppable(elem) {
+    const leaveDroppable = (elem) => {
         elem.style.background = '';
     }
 
-    render () {
-        const result = [];
-        for (let i = 0; i < 11; i++) {
-            result.push(<div className="result" style={{visibility: this.state.hidden}} key={i} onDragStart={this.dragStart} onMouseDown={this.mouseDown} >
+
+    const result = [];
+    for (let i = 0; i < 11; i++) {
+
+        result.push(
+            <div className="result" style={{ visibility: resultVisibility }} key={i} onDragStart={dragStart} onMouseDown={mouseDown} >
                 <span>{shuffleResults[i]}</span>
-            </div>);
-        }
-        return result;
+            </div>
+        );
     }
-    
+    return result;
+
 }
+
+function mapStateToProps(state) {
+    return {
+        resultVisibility: state.resultVisibility
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        makeHiddenResult: () => dispatch(makeHiddenResult("hidden")),
+        makeVisibleResult: () => dispatch(makeVisibleResult("visible")),
+        makeVisibleSnake: () => dispatch(makeVisibleSnake(true))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Result);
 
 
 
