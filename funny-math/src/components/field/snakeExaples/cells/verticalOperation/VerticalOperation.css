@@ -7,4 +7,8 @@
     align-items: center;
     justify-content: flex-end;
     padding-right: 3px;
+    text-shadow: 1px 2px 7px white;
+    font-size: 1.2vw;
+    font-weight: 600;
+    box-shadow:  2px 0px 0px white;
 }
