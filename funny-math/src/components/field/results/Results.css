@@ -1,12 +1,13 @@
 .results {
     width: 100%;
     height: 10vh;
-    margin-top: 8%;
+    margin-top: 2%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-shadow: 1px 2px 7px white;
-    font-size: 1.2vw;
+    font-size: 1.5vw;
     font-weight: 600;
-
+    margin-bottom: 2%;
+    font-family: 'Courier New', Courier, monospace;
 }
