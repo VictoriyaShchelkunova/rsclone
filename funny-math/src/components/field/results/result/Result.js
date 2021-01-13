@@ -2,9 +2,10 @@ import React from "react";
 import './Result.css';
 import { shuffleResults } from "./getResults";
 import { connect } from 'react-redux';
-import { makeHiddenResult, makeVisibleResult, makeVisibleSnake } from "../../../../actions";
+import { makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore, increaseMistakes } from "../../../../actions";
 
-export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, makeVisibleSnake }) => {
+export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore,
+    isSound, increaseMistakes }) => {
 
     const dragStart = (e) => {
         e.preventDefault();
@@ -58,6 +59,13 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
                 result.style.left = "";
                 result.style.zIndex = "";
                 if (droppableBelow) leaveDroppable(droppableBelow);
+                if (clearAnswer) {
+                    if (isSound) {
+                        const error = new Audio('assets/sounds/error.m4a');
+                        error.play();
+                    }
+                    increaseMistakes();
+                }
 
             } else {
                 result.style.display = "none";
@@ -65,7 +73,12 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
                 droppableBelow.firstChild.classList.remove("text-hidden");
                 droppableBelow.firstChild.classList.add("text-visual");
                 droppableBelow.classList.remove("droppable");
+                if (isSound) {
+                    const error = new Audio('assets/sounds/correct.m4a');
+                    error.play();
+                }
                 makeVisibleSnake();
+                increaseScore();
             };
 
             document.removeEventListener('mousemove', onMouseMove);
@@ -93,7 +106,8 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
 
 function mapStateToProps(state) {
     return {
-        resultVisibility: state.resultVisibility
+        resultVisibility: state.resultVisibility,
+        isSound: state.isSound,
     };
 };
 
@@ -101,7 +115,9 @@ function mapDispatchToProps(dispatch) {
     return {
         makeHiddenResult: () => dispatch(makeHiddenResult("hidden")),
         makeVisibleResult: () => dispatch(makeVisibleResult("visible")),
-        makeVisibleSnake: () => dispatch(makeVisibleSnake(true))
+        makeVisibleSnake: () => dispatch(makeVisibleSnake(true)),
+        increaseScore: () => dispatch(increaseScore(1)),
+        increaseMistakes: () => dispatch(increaseMistakes(1))
     }
 }
 
