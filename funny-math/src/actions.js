@@ -18,3 +18,17 @@ export const makeVisibleSnake = (boolean) => {
         payload: boolean
     }
 };
+
+export const increaseScore = (num) => {
+    return {
+        type: 'INCREASE_SCORE',
+        payload: num
+    }
+};
+
+export const increaseMistakes = (num) => {
+    return {
+        type: 'INCREASE_MISTAKES',
+        payload: num
+    }
+};
