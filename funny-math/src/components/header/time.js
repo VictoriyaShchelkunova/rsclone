@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Timer } from "./Timer";
+import Timer from "./Timer";
 
 export default class TimeCounter extends Component {
     constructor(props){
