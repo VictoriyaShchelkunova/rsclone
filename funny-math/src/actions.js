@@ -32,3 +32,16 @@ export const increaseMistakes = (num) => {
         payload: num
     }
 };
+
+export const finishGame = () => {
+    return {
+        type: 'FINISH_GAME',
+    }
+};
+
+export const saveTime = ({minutes, seconds}) => {
+    return {
+        type: 'SAVE_TIME',
+        payload: {minutes, seconds}
+    }
+};
