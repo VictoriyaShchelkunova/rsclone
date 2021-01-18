@@ -13,11 +13,13 @@ const initialState = {
     correctAnswers: 0,
     resultVisibility: "visible",
     userScore: 0,
-    userName: "John",
+    userName: "Вася",
     isSound: true,
     userMistakes: 0,
     currentGame: { score: 0, mistakes: 0 },
-    isTimer: false,
+    isTimer: true,
+    isFinishGame: false,
+    time: {min: 0, sec: 0}
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -57,6 +59,17 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 currentGame: { mistakes: state.currentGame.mistakes + 1, score: state.currentGame.score }
             }
+        case "FINISH_GAME": 
+        return {
+            ...state,
+            isFinishGame: true,
+            isTimer: false
+        }
+        case "SAVE_TIME":
+        return {
+            ...state,
+            time: {min: action.payload.minutes, sec: action.payload.seconds}
+        }
         default:
             return state;
     }
