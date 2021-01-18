@@ -2,10 +2,10 @@ import React from "react";
 import './Result.css';
 import { shuffleResults } from "./getResults";
 import { connect } from 'react-redux';
-import { makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore, increaseMistakes } from "../../../../actions";
+import { makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore, increaseMistakes, finishGame } from "../../../../actions";
 
 export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore,
-    isSound, increaseMistakes }) => {
+    isSound, increaseMistakes, currentGame, finishGame, isFinishGame}) => {
 
     const dragStart = (e) => {
         e.preventDefault();
@@ -73,12 +73,16 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
                 droppableBelow.firstChild.classList.remove("text-hidden");
                 droppableBelow.firstChild.classList.add("text-visual");
                 droppableBelow.classList.remove("droppable");
-                if (isSound) {
-                    const error = new Audio('assets/sounds/correct.m4a');
+                if (isSound && currentGame.score !== 10) {
+                    const error = new Audio('assets/sounds/correct.wav');
                     error.play();
                 }
                 makeVisibleSnake();
                 increaseScore();
+               
+                if(currentGame.score === 10){
+                    finishGame();
+                }
             };
 
             document.removeEventListener('mousemove', onMouseMove);
@@ -108,6 +112,8 @@ function mapStateToProps(state) {
     return {
         resultVisibility: state.resultVisibility,
         isSound: state.isSound,
+        currentGame: state.currentGame,
+        isFinishGame: state.isFinishGame
     };
 };
 
@@ -117,7 +123,8 @@ function mapDispatchToProps(dispatch) {
         makeVisibleResult: () => dispatch(makeVisibleResult("visible")),
         makeVisibleSnake: () => dispatch(makeVisibleSnake(true)),
         increaseScore: () => dispatch(increaseScore(1)),
-        increaseMistakes: () => dispatch(increaseMistakes(1))
+        increaseMistakes: () => dispatch(increaseMistakes(1)),
+        finishGame: () => dispatch(finishGame())
     }
 }
 
