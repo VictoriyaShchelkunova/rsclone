@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    cursor: grabbing;
     box-shadow: 6px 3px 2px 0px black;
     border: 2px solid white;
 }
