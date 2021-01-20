@@ -13,13 +13,19 @@ const initialState = {
     correctAnswers: 0,
     resultVisibility: "visible",
     userScore: 0,
-    userName: "Вася",
+    userName: "",
     isSound: true,
     userMistakes: 0,
     currentGame: { score: 0, mistakes: 0 },
-    isTimer: true,
+    isTimer: false,
     isFinishGame: false,
-    time: {min: 0, sec: 0}
+    time: { min: 0, sec: 0 },
+    isMenu: false,
+    isShowMenu: false,
+    isHeader: true,
+    isField: false,
+    isRegistrPage: false,
+    isLevelesPage: false,
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -59,17 +65,34 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 currentGame: { mistakes: state.currentGame.mistakes + 1, score: state.currentGame.score }
             }
-        case "FINISH_GAME": 
-        return {
-            ...state,
-            isFinishGame: true,
-            isTimer: false
-        }
+        case "FINISH_GAME":
+            return {
+                ...state,
+                isFinishGame: true,
+                isTimer: false
+            }
         case "SAVE_TIME":
-        return {
-            ...state,
-            time: {min: action.payload.minutes, sec: action.payload.seconds}
-        }
+            return {
+                ...state,
+                time: { min: action.payload.minutes, sec: action.payload.seconds }
+            }
+        case "CLOSE_MENU":
+            return {
+                ...state,
+                isMenu: true,
+                isShowMenu: false,
+            }
+        case "SHOW_MENU":
+            return {
+                ...state,
+                isShowMenu: true,
+                isMenu: false,
+            }
+        case "CHANGE_USER_NAME":
+            return {
+                ...state,
+                userName: action.payload,
+            }
         default:
             return state;
     }
