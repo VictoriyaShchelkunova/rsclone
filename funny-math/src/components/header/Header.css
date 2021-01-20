@@ -1,6 +1,6 @@
 .header {
     width: 99.7%;
     height: 4vw;
-    display: flex;
     justify-content: space-between;   
+    position: relative;
 }
