@@ -45,3 +45,21 @@ export const saveTime = ({minutes, seconds}) => {
         payload: {minutes, seconds}
     }
 };
+
+export const closeMenu = () => {
+    return {
+        type: 'CLOSE_MENU',
+    }
+};
+export const showMenu = () => {
+    return {
+        type: 'SHOW_MENU',
+    }
+};
+
+export const changeUserName = (name) => {
+    return {
+        type: 'CHANGE_USER_NAME',
+        payload: name
+    }
+};
