@@ -1,6 +1,6 @@
 import React from "react";
 import "./Row.css";
-import { Cell } from "../cell/Cell";
+import  Cell  from "../cell/Cell";
 
 export const Rows = () => {
     const rows = [];
