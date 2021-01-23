@@ -4,16 +4,26 @@ import  Field  from "../field/Field";
 import Header from "../header/Header";
 import Finish from "../finish/Finish"; 
 import Registr from "../registr/Registr";
-import { LevelesPage } from "../levelsPage/LevelesPage";
+import LevelesPage from "../levelsPage/LevelesPage";
+import { connect } from "react-redux";
 
-export const Main = () => {
+export const Main = ({isFinish}) => {
+    
     return (
         <div className="wrapper">
             <Header />
             <Field />
-            <Finish />
+            {isFinish ? <Finish /> : null }
             <Registr />
             <LevelesPage />
         </div>
     )
 }
+
+function mapStateToProps(state){
+    return {
+        isFinish: state.isFinishGame
+    }
+}
+
+export default connect(mapStateToProps)(Main)
