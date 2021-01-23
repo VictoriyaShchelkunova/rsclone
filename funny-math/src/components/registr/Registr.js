@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import "./Registr.css";
 import { connect } from "react-redux";
-import { changeUserName } from "../../actions";
+import { changeUserName, showLevelesPage } from "../../actions";
 
-const Registr = ({changeName, name, isRegistrPage}) => {
+const Registr = ({changeName, name, isRegistrPage, showLevelesPage}) => {
     const inputHandler = (e) => {
         const userName = e.currentTarget.value;
         changeName(userName);
     }
     const buttonHandler = () => {
-        if(name) localStorage.setItem("userName", name);
+        if(name.trim()){ 
+            localStorage.setItem("userName", name);
+            showLevelesPage();
+        }
     }
     return (
         <div className="registr-page" style={isRegistrPage ? {display: "flex"} : {display: "none"}}>
@@ -31,7 +34,9 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch) {
     return {
-        changeName: (name) => dispatch(changeUserName(name))
+        changeName: (name) => dispatch(changeUserName(name)),
+        showLevelesPage: () => dispatch(showLevelesPage())
+
     }
 }
 
