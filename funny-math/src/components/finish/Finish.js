@@ -2,19 +2,19 @@ import React from "react";
 import "./Finish.css";
 import { connect } from "react-redux";
 import { Bonus } from "./Bonus";
-
-const Finish = ({ isFinish, mistakes, time }) => {
+import { replayGame, backToLevelesPage } from "../../actions";
+const Finish = ({ isFinish, mistakes, time, replay, backToLevelesPage}) => {
 
     const message = {
         imgSrc: "", bonus: 0, textMessage: "",
         mistakes: mistakes, visibleFinish: "none",
-        time: {min: "", sec: ""}
+        time: { min: "", sec: "" }
     }
-    
+
     if (isFinish) {
         let minutes = time.min;
         let seconds = time.sec;
-        message.time.min = (minutes < 10)  ? `0${minutes}:` : minutes;
+        message.time.min = (minutes < 10) ? `0${minutes}:` : minutes;
         message.time.sec = (seconds < 10) ? `0${seconds}` : seconds;
         if (mistakes > 3) {
             message.imgSrc = "assets/images/faild.png";
@@ -36,11 +36,24 @@ const Finish = ({ isFinish, mistakes, time }) => {
         }
     };
 
+    const replayButtonHandler = () => {
+        replay();
+    }
+
+    const closeButtonHandler = () => {
+        backToLevelesPage();
+    }
+
     return (
         <div className="finish-block" style={(isFinish) ? { display: "flex" } : { display: "none" }}>
+
             <div className="wrapper-block">
                 <div className="message-block">
-                    <img src={message.imgSrc} alt="" />
+                    <div className="images">
+                        <img src="assets/images/arrow-repeat.png" alt="arrow" id="arrow" title="Replay" onClick={replayButtonHandler}/>
+                        <img src={message.imgSrc} alt="" />
+                        <img src="assets/images/close-menu.png" alt="close" id="close-window" onClick={closeButtonHandler}/>
+                    </div>
                     <p>{message.textMessage}</p>
                     <p>Time: {message.time.min}{message.time.sec}</p>
                     <p>Bonus: <Bonus numberBonus={message.bonus} /></p>
@@ -59,4 +72,12 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Finish);
+function mapDispatchToProps(dispatch){
+    return {
+        replay: () => dispatch(replayGame()),
+        backToLevelesPage: () => dispatch(backToLevelesPage())
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Finish);
