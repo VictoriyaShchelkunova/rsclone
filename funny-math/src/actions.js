@@ -63,3 +63,52 @@ export const changeUserName = (name) => {
         payload: name
     }
 };
+
+export const showEasyLeveles = () => {
+    return {
+        type: 'SHOW_EASY_LEVELES',
+    }
+};
+
+export const showMiddleLeveles = () => {
+    return {
+        type: 'SHOW_MIDDLE_LEVELES',
+    }
+};
+
+export const showHardLeveles = () => {
+    return {
+        type: 'SHOW_HARD_LEVELES',
+    }
+};
+
+export const showLevelesPage = () => {
+    return {
+        type: 'SHOW_LEVELES_PAGE',
+    }
+};
+
+export const getCurrentLevel = (level) => {
+    return {
+        type: 'GET_CURRENT_LEVEL',
+        payload: level
+    }
+};
+
+export const startGame = () => {
+    return {
+        type: 'START_GAME',
+    }
+};
+
+export const replayGame = () => {
+    return {
+        type: 'REPLAY_GAME',
+    }
+};
+
+export const backToLevelesPage = () => {
+    return {
+        type: 'BACK_LEVELES_PAGE',
+    }
+};
