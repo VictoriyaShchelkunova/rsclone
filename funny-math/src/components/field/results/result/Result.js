@@ -1,11 +1,11 @@
 import React from "react";
 import './Result.css';
-import { shuffleResults } from "./getResults";
 import { connect } from 'react-redux';
 import { makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore, increaseMistakes, finishGame } from "../../../../actions";
 
 export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore,
-    isSound, increaseMistakes, currentGame, finishGame, isFinishGame}) => {
+    isSound, increaseMistakes, currentGame, finishGame, currentLevelData, isField}) => {
+    const shuffleResults = currentLevelData;
 
     const dragStart = (e) => {
         e.preventDefault();
@@ -79,8 +79,8 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
                 }
                 makeVisibleSnake();
                 increaseScore();
-               
-                if(currentGame.score === 10){
+
+                if (currentGame.score === 10) {
                     finishGame();
                 }
             };
@@ -99,7 +99,7 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
     for (let i = 0; i < 11; i++) {
 
         result.push(
-            <div className="result" style={{ visibility: resultVisibility }} key={i} onDragStart={dragStart} onMouseDown={mouseDown} >
+            <div className="result" style={isField ? { visibility: resultVisibility } : {display: "flex", position: "absolute"}} key={i} onDragStart={dragStart} onMouseDown={mouseDown} >
                 <span>{shuffleResults[i]}</span>
             </div>
         );
@@ -113,7 +113,10 @@ function mapStateToProps(state) {
         resultVisibility: state.resultVisibility,
         isSound: state.isSound,
         currentGame: state.currentGame,
-        isFinishGame: state.isFinishGame
+        isFinishGame: state.isFinishGame,
+        levelesGame: state.levelesGame,
+        currentLevel: state.currentLevel,
+        currentLevelData: state.currentLevelData
     };
 };
 
