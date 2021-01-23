@@ -14,7 +14,6 @@ const Menu = ({ closeMenu, isShowMenu }) => {
             <img src="assets/images/close-menu.png" alt="icon-close" onClick={closeMenuHandler} />
             <ul>
                 <li className="active-link">Main</li>
-                <li>Game</li>
                 <li>Settings</li>
                 <li>Statistics</li>
             </ul>
