@@ -194,7 +194,8 @@ export const rootReducer = (state = initialState, action) => {
                 { class: "snake-body-ninth", status: false },
                 { class: "snake-body-tenth", status: false },
                 { class: "snake-body-eleventh", status: false },],
-                correctAnswers: 0
+                correctAnswers: 0,
+                isBurgerMenu: false
             }
         case "BACK_LEVELES_PAGE":
             return {

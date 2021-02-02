@@ -18,6 +18,11 @@ export const Main = ({isFinish}) => {
             <Registr />
             <LevelesPage />
             <Statistics />
+            <footer>
+                <img src="assets/images/rs_school_js.png" alt="" />
+                <a href="https://rs.school/js/">https://rs.school/js/</a>
+                <a href="https://github.com/VictoriyaShchelkunova/">https://github.com/VictoriyaShchelkunova/</a>
+            </footer>
         </div>
     )
 }
