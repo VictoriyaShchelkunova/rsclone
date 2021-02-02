@@ -29,7 +29,7 @@
 }
 
 .registr-page div button {
-    width: 3.5vw;
+    /* width: 3.5vw; */
     height: 3.5vw;
     background: white;
     border-radius: 10px;
@@ -38,4 +38,6 @@
     font-family: "Courier New", Courier, monospace;
     font-size: 1.5vw;
     font-weight: 600;
+    margin-right: 3.5vw;
+    padding: 1vw;
 }
