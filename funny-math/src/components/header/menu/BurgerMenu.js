@@ -3,12 +3,12 @@ import "./BurgerMenu.css";
 import { connect } from "react-redux";
 import { showMenu } from "../../../actions";
 
-export const BurgerMenu = ({showMenu}) => {
+export const BurgerMenu = ({ showMenu, isBurgerMenu }) => {
     const showMenuHandler = () => {
         showMenu();
     }
     return (
-        <div className="burger-menu" onClick={showMenuHandler}>
+        <div className="burger-menu" onClick={showMenuHandler} style={isBurgerMenu ? {visibility: "visible"} : {visibility: "hidden"}}>
             <div className="burger-menu-item"></div>
             <div className="burger-menu-item"></div>
             <div className="burger-menu-item"></div>
@@ -16,16 +16,17 @@ export const BurgerMenu = ({showMenu}) => {
     )
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         isMenu: state.isMenu,
-    }    
+        isBurgerMenu: state.isBurgerMenu
+    }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
         showMenu: () => dispatch(showMenu())
     }
 }
 
-export default connect(mapStateToProps,  mapDispatchToProps)(BurgerMenu)
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerMenu)
