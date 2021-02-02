@@ -64,6 +64,13 @@ export const changeUserName = (name) => {
     }
 };
 
+export const changeUserPassword = (password) => {
+    return {
+        type: 'CHANGE_USER_PSSWORD',
+        payload: password
+    }
+};
+
 export const showEasyLeveles = () => {
     return {
         type: 'SHOW_EASY_LEVELES',
@@ -112,3 +119,66 @@ export const backToLevelesPage = () => {
         type: 'BACK_LEVELES_PAGE',
     }
 };
+
+
+export const saveEasyLevelesStatus = (list) => {
+    return {
+        type: 'SAVE_EASY_LEVELES_STATUS',
+        payload: list
+    }
+};
+
+export const saveMiddleLevelesStatus = (list) => {
+    return {
+        type: 'SAVE_MIDDLE_LEVELES_STATUS',
+        payload: list
+    }
+};
+
+export const saveHardLevelesStatus = (list) => {
+    return {
+        type: 'SAVE_HARD_LEVELES_STATUS',
+        payload: list
+    }
+};
+
+
+export const saveCurrentOperation = (operation) => {
+    return {
+        type: 'SAVE_CURRENT_OPERATION',
+        payload: operation
+    }
+};
+
+export const increaseStatisticMistakes = () => {
+    return {
+        type: 'INCREASE_STATISTIC_MISTAKES',        
+    }
+};
+
+export const increaseStatisticCorrectAnswers = () => {
+    return {
+        type: 'INCREASE_STATISTIC_CORRECT_ANSWERS',        
+    }
+};
+
+export const saveStatistics = (statistics) => {
+    return {
+        type: "SAVE_STATISTICS",
+        payload: statistics
+    }    
+}
+
+export const showStatisticsPage = () => {
+    return {
+        type: "SHOW_STATISTICS_PAGE"
+    }
+}
+
+export const showLeveles = () => {
+    return {
+        type: "SHOW_LEVELES"
+    }
+}
+
+
