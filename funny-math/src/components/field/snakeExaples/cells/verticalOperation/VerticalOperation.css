@@ -1,0 +1,15 @@
+.operation {
+    width: 50%;
+    border-right: 2px solid black;
+    height: 100%;
+    margin-right: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 3px;
+    text-shadow: 1px 1px white;
+    font-size: 1.8vw;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow:  2px 0px 0px white;
+}
