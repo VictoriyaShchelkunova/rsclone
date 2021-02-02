@@ -1,10 +1,15 @@
 import React from "react";
 import './Result.css';
 import { connect } from 'react-redux';
-import { makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore, increaseMistakes, finishGame } from "../../../../actions";
+import {
+    makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore, increaseMistakes, finishGame,
+    saveCurrentOperation, increaseStatisticMistakes, increaseStatisticCorrectAnswers
+} from "../../../../actions";
+import { leveles } from "../../../../leveles";
 
 export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, makeVisibleSnake, increaseScore,
-    isSound, increaseMistakes, currentGame, finishGame, currentLevelData, isField}) => {
+    isSound, increaseMistakes, currentGame, finishGame, currentLevelData, isField, currentLevel, saveOperation,
+    increaseStatisticMistake, increaseStatisticCorrectAnswer }) => {
     const shuffleResults = currentLevelData;
 
     const dragStart = (e) => {
@@ -51,7 +56,18 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
         result.onmouseup = () => {
             let clearAnswer;
             if (droppableBelow) {
+                const currentLevelGame = leveles[currentLevel - 1];
+                let idxOperation = 0;
+
                 clearAnswer = droppableBelow.firstChild.innerText;
+                currentLevelGame.forEach((example, idx) => {
+                    if (example.firstOperand === +clearAnswer) {
+                        idxOperation = idx - 1;
+                    }
+                });
+
+                let currentOperation = currentLevelGame[idxOperation].operation[0];
+                saveOperation(currentOperation);
             }
             if (usersAnswer !== clearAnswer) {
                 result.style.position = "relative";
@@ -65,6 +81,7 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
                         error.play();
                     }
                     increaseMistakes();
+                    increaseStatisticMistake();
                 }
 
             } else {
@@ -79,6 +96,8 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
                 }
                 makeVisibleSnake();
                 increaseScore();
+                increaseStatisticCorrectAnswer();
+                saveOperation("");
 
                 if (currentGame.score === 10) {
                     finishGame();
@@ -99,7 +118,7 @@ export const Result = ({ resultVisibility, makeHiddenResult, makeVisibleResult, 
     for (let i = 0; i < 11; i++) {
 
         result.push(
-            <div className="result" style={isField ? { visibility: resultVisibility } : {display: "flex", position: "absolute"}} key={i} onDragStart={dragStart} onMouseDown={mouseDown} >
+            <div className="result" style={isField ? { visibility: resultVisibility } : { display: "flex", position: "absolute" }} key={i} onDragStart={dragStart} onMouseDown={mouseDown} >
                 <span>{shuffleResults[i]}</span>
             </div>
         );
@@ -116,7 +135,8 @@ function mapStateToProps(state) {
         isFinishGame: state.isFinishGame,
         levelesGame: state.levelesGame,
         currentLevel: state.currentLevel,
-        currentLevelData: state.currentLevelData
+        currentLevelData: state.currentLevelData,
+        currentOperation: state.currentOperation
     };
 };
 
@@ -127,7 +147,11 @@ function mapDispatchToProps(dispatch) {
         makeVisibleSnake: () => dispatch(makeVisibleSnake(true)),
         increaseScore: () => dispatch(increaseScore(1)),
         increaseMistakes: () => dispatch(increaseMistakes(1)),
-        finishGame: () => dispatch(finishGame())
+        finishGame: () => dispatch(finishGame()),
+        saveOperation: (operation) => dispatch(saveCurrentOperation(operation)),
+        increaseStatisticMistake: () => dispatch(increaseStatisticMistakes()),
+        increaseStatisticCorrectAnswer: () => dispatch(increaseStatisticCorrectAnswers()),
+
     }
 }
 
