@@ -1,11 +1,19 @@
 import React from "react";
 import "./Menu.css";
 import { connect } from "react-redux";
-import { closeMenu } from "../../actions";
+import { closeMenu, showStatisticsPage, showLeveles } from "../../actions";
 
-const Menu = ({ closeMenu, isShowMenu }) => {
+const Menu = ({ closeMenu, isShowMenu, showStat, isLevelesPage, isStatisticsPage, turnLevelesPage }) => {
     const closeMenuHandler = () => {
         closeMenu();
+    }
+
+    const showStatistics = () => {
+        showStat();
+    }
+
+    const showPageLeveles = () => {
+        turnLevelesPage();
     }
     
     return (
@@ -13,9 +21,9 @@ const Menu = ({ closeMenu, isShowMenu }) => {
             : { background: "rgb(0, 132, 255)"}}>
             <img src="assets/images/close-menu.png" alt="icon-close" onClick={closeMenuHandler} />
             <ul>
-                <li className="active-link">Main</li>
-                <li>Settings</li>
-                <li>Statistics</li>
+                <li className={isLevelesPage ? "active-link" : ""} onClick={showPageLeveles}>Main</li>
+                {/* <li>Settings</li> */}
+                <li  className={isStatisticsPage ? "active-link" : ""} onClick={showStatistics}>Statistics</li>
             </ul>
         </div>
     )
@@ -24,12 +32,16 @@ const Menu = ({ closeMenu, isShowMenu }) => {
 function mapStateToProps(state) {
     return {
         isShowMenu: state.isShowMenu,
+        isLevelesPage: state.isLevelesPage,
+        isStatisticsPage: state.isStatisticsPage
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        closeMenu: () => dispatch(closeMenu())
+        closeMenu: () => dispatch(closeMenu()),
+        showStat: () => dispatch(showStatisticsPage()),
+        turnLevelesPage: () => dispatch(showLeveles())
     }
 }
 
