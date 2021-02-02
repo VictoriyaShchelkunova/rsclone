@@ -3,7 +3,7 @@ import "./Finish.css";
 import { connect } from "react-redux";
 import { Bonus } from "./Bonus";
 import { replayGame, backToLevelesPage } from "../../actions";
-const Finish = ({ isFinish, mistakes, time, replay, backToLevelesPage}) => {
+const Finish = ({ isFinish, mistakes, time, replay, backToLevelesPage, statistics }) => {
 
     const message = {
         imgSrc: "", bonus: 0, textMessage: "",
@@ -50,9 +50,9 @@ const Finish = ({ isFinish, mistakes, time, replay, backToLevelesPage}) => {
             <div className="wrapper-block">
                 <div className="message-block">
                     <div className="images">
-                        <img src="assets/images/arrow-repeat.png" alt="arrow" id="arrow" title="Replay" onClick={replayButtonHandler}/>
+                        <img src="assets/images/arrow-repeat.png" alt="arrow" id="arrow" title="Replay" onClick={replayButtonHandler} />
                         <img src={message.imgSrc} alt="" />
-                        <img src="assets/images/close-menu.png" alt="close" id="close-window" onClick={closeButtonHandler}/>
+                        <img src="assets/images/close-menu.png" alt="close" id="close-window" onClick={closeButtonHandler} />
                     </div>
                     <p>{message.textMessage}</p>
                     <p>Time: {message.time.min}{message.time.sec}</p>
@@ -69,14 +69,15 @@ function mapStateToProps(state) {
         isFinish: state.isFinishGame,
         mistakes: state.currentGame.mistakes,
         time: state.time,
+        statistics: state.statistics
     }
 }
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
     return {
         replay: () => dispatch(replayGame()),
         backToLevelesPage: () => dispatch(backToLevelesPage())
-        
+
     }
 }
 
