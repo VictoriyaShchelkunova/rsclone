@@ -3,9 +3,16 @@ import { shuffle } from "../components/field/results/result/getResults";
 import { getFirstOperands } from "../components/field/snakeExaples/cells/cell/getFirstOperands";
 import { getOperations } from "../components/field/snakeExaples/cells/verticalOperation/getOperations";
 import { getLevelesStatus } from "../getLevelesStatus";
+import { updateStatistics } from "../updateStatistics";
 
 const initialState = {
     levelesGame: leveles,
+    statistics: {
+        addition: { correct: 0, wrong: 0, attempts: 0 },
+        substraction: { correct: 0, wrong: 0, attempts: 0 },
+        multiplication: { correct: 0, wrong: 0, attempts: 0 },
+        division: { correct: 0, wrong: 0, attempts: 0 },
+    },
     bodyResultSnake: [{ class: "snake-body", status: false },
     { class: "snake-body-second", status: false },
     { class: "snake-body-third", status: false },
@@ -30,9 +37,10 @@ const initialState = {
     resultVisibility: "visible",
     userScore: 0,
     userName: "",
+    userPassword: "",
     isSound: true,
     userMistakes: 0,
-    currentGame: { score: 0, mistakes: 0 },
+    currentGame: { score: 0, mistakes: 0, operation: "" },
     isTimer: false,
     isFinishGame: false,
     time: { min: 0, sec: 0 },
@@ -45,10 +53,13 @@ const initialState = {
     isEasyLeveles: false,
     isMiddleLeveles: false,
     isHardLeveles: false,
+    isStatisticsPage: false,
     currentLevel: 0,
     currentLevelData: [],
     firstOperands: [],
     operations: {},
+    isBurgerMenu: true,
+    currentOperation: ""
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -97,6 +108,7 @@ export const rootReducer = (state = initialState, action) => {
                 middleLevelesStatus: [...getLevelesStatus(state.currentGame.mistakes, state.currentLevel, state)[1]],
                 hardLevelesStatus: [...getLevelesStatus(state.currentGame.mistakes, state.currentLevel, state)[2]],
                 isField: false,
+                isBurgerMenu: true,
             }
         case "SAVE_TIME":
             return {
@@ -119,6 +131,11 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userName: action.payload,
+            }
+        case "CHANGE_USER_PASSWORD":
+            return {
+                ...state,
+                userPassword: action.payload,
             }
         case "SHOW_EASY_LEVELES":
             return {
@@ -145,7 +162,8 @@ export const rootReducer = (state = initialState, action) => {
         case "GET_CURRENT_LEVEL":
             return {
                 ...state,
-                currentLevel: action.payload
+                currentLevel: action.payload,
+                isBurgerMenu: false
             }
         case "START_GAME":
             return {
@@ -197,6 +215,55 @@ export const rootReducer = (state = initialState, action) => {
                 { class: "snake-body-eleventh", status: false },],
                 correctAnswers: 0,
                 isLevelesPage: true,
+            }
+        case "SAVE_EASY_LEVELES_STATUS":
+            return {
+                ...state,
+                easyLevelesStatus: action.payload,
+            }
+        case "SAVE_MIDDLE_LEVELES_STATUS":
+            return {
+                ...state,
+                middleLevelesStatus: action.payload,
+            }
+        case "SAVE_HARD_LEVELES_STATUS":
+            return {
+                ...state,
+                hardLevelesStatus: action.payload,
+            }
+        case "SAVE_CURRENT_OPERATION":
+            return {
+                ...state,
+                currentOperation: action.payload,
+            }
+        case "INCREASE_STATISTIC_MISTAKES":
+            return {
+                ...state,
+                statistics: {...updateStatistics(state.statistics, state.currentOperation, false, state.userName)}
+            }
+        case "INCREASE_STATISTIC_CORRECT_ANSWERS":
+            return {
+                ...state,
+                statistics: {...updateStatistics(state.statistics, state.currentOperation, true, state.userName)}
+            }
+        case "SAVE_STATISTICS": 
+        return {
+            ...state,
+            statistics: {...action.payload}
+        }
+        case "SHOW_STATISTICS_PAGE":
+            return {
+                ...state,
+                isStatisticsPage: true,
+                isLevelesPage: false,
+                isShowMenu: false
+            }
+        case "SHOW_LEVELES":
+            return {
+                ...state,
+                isLevelesPage: true,
+                isStatisticsPage: false,
+                isShowMenu: false
             }
         default:
             return state;
