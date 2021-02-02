@@ -30,3 +30,10 @@ footer a {
     font-size: 1.5vw;
     font-weight: 600;
 }
+
+footer span {
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5vw;
+    font-weight: 600;
+}
