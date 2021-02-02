@@ -1,47 +1,76 @@
 const openNextLevel = (mistakes, currentLevel, state) => {
+    debugger
     let easyLevelesStatus;
     let middleLevelesStatus;
     let hardLevelesStatus;
-    if (currentLevel < 7) {
-        if (mistakes < 4) {
-            easyLevelesStatus = [...state.easyLevelesStatus.map(({ status, name, img }) => {
-                return changeStatusLevel(status, name, currentLevel, img);
-            })];
-        }        
-    } else {
-        easyLevelesStatus = state.easyLevelesStatus;
-    };
 
-    if (currentLevel < 13 && currentLevel > 6) {
-        if (mistakes < 4) {
-            middleLevelesStatus = [...state.middleLevelesStatus.map(({ status, name, img }) => {
-                return changeStatusLevel(status, name, currentLevel, img);
-            })];
-        }
-    } else {
-        middleLevelesStatus = state.easyLevelesStatus;
-    };
+    let users = JSON.parse(localStorage.getItem("users"));
+    const currentUser = users.find(({ userName }) => userName === state.userName);
 
-    if (currentLevel < 19 && currentLevel > 12) {
+    let easyLeveles = currentUser.easyLevelesStatus.map((level) => {
         if (mistakes < 4) {
-            hardLevelesStatus = [...state.hardLevelesStatus.map(({ status, name, img }) => {
-                return changeStatusLevel(status, name, currentLevel, img);
-            })];
+            return changeStatusLevel(level.status, level.name, currentLevel, level.img);
+        };
+        return level;
+    });
+
+    let middleLeveles = currentUser.middleLevelesStatus.map((level) => {
+        if (mistakes < 4) {
+            return changeStatusLevel(level.status, level.name, currentLevel, level.img);
         }
-    } else {
-        hardLevelesStatus = state.easyLevelesStatus;
-    }
+        return level;
+    });
+
+    let hardLeveles = currentUser.hardLevelesStatus.map((level) => {
+        return changeStatusLevel(level.status, level.name, currentLevel, level.img);
+    });
+
+    users = users.map((user) => {
+        if (user.userName === state.userName) {
+            return {
+                ...user,
+                easyLevelesStatus: easyLeveles,
+                middleLevelesStatus: middleLeveles,
+                hardLevelesStatus: hardLeveles,
+            }
+        }
+        return user;
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    easyLevelesStatus = [...state.easyLevelesStatus.map((level) => {
+        if(mistakes < 4){
+            return changeStatusLevel(level.status, level.name, currentLevel, level.img);
+        };
+        return level;        
+    })];
+
+    middleLevelesStatus = [...state.middleLevelesStatus.map((level) => {
+        if(mistakes < 4) {
+            return changeStatusLevel(level.status, level.name, currentLevel, level.img);
+        }
+        return level;        
+    })];
+
+    hardLevelesStatus = [...state.hardLevelesStatus.map((level) => {
+        if(mistakes < 4){
+            return changeStatusLevel(level.status, level.name, currentLevel, level.img);
+        }
+        return level;
+    })];
+
     return [easyLevelesStatus, middleLevelesStatus, hardLevelesStatus];
 }
 
 function changeStatusLevel(status, name, currentLevel, img) {
-    if (name === currentLevel) {
+    if (+name === currentLevel) {
         return { status: "complete", name };
-    } else if (name - 1 === currentLevel) {
+    } else if (+name - 1 === currentLevel) {
         return { status: "progress", name };
     } else {
-        if(name === "complete"){
-            return {status, name};
+        if (status === "complete") {
+            return { status, name };
         }
         return { status, name, img };
     }
@@ -49,5 +78,5 @@ function changeStatusLevel(status, name, currentLevel, img) {
 
 export const getLevelesStatus = (mistakes, currentLevel, state) => {
     return openNextLevel(mistakes, currentLevel, state);
-} 
+}
 
